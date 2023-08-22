@@ -1,0 +1,165 @@
+.scrool {
+  overflow-y: scroll;
+  max-height: 719.22px;
+  width: 1085px;
+}
+
+.section {
+  width: 1085px;
+  overflow: hidden;
+  height: 719.22px;
+  border-radius: 8px;
+  background: #121212;
+}
+.section_center {
+  flex-shrink: 1;
+  width: 100%;
+}
+.section_center_elements {
+  margin-bottom: 10px;
+  flex-shrink: 1;
+  width: 1036.99px;
+}
+.section_center_elements_top {
+  height: 46px;
+  width: 1036.99px;
+  font-family: Arial;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 23px;
+  color: #FFFFFF;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-around;
+  position: relative;
+}
+.section_center_elements_top_text {
+  position: absolute;
+  left: 15px;
+}
+.section_center_elements_top_text2 {
+  position: absolute;
+  right: 15px;
+  font-size: 13px;
+  color: #B3B3B3;
+}
+.section_center_elements_element {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 1036.99px;
+}
+.section_center_elements_element_element {
+  background: #181818;
+  height: 278.58px;
+  width: 188.2px;
+  border-radius: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.section_center_elements_element_element_div {
+  width: 156.19px;
+  height: 246.58px;
+  gap: 15px;
+}
+.section_center_elements_element_element_div_top {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+}
+.section_center_elements_element_element_div_top_background {
+  background: url(../icons/image.png);
+  width: 156.19px;
+  height: 156.19px;
+}
+.section_center_elements_element_element_div_bottom {
+  width: 156.19px;
+  height: 75.38px;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.section_center_elements_element_element_div_bottom_text1 {
+  height: 30.59px;
+  width: 109.42px;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 25.6px;
+  font-family: Arial;
+  color: #FFFFFF;
+}
+.section_center_elements_element_element_div_bottom_text2 {
+  font-weight: 400;
+  font-family: Arial;
+  height: 45.78px;
+  font-size: 12px;
+  line-height: 22.4px;
+  color: #A7A7A7;
+  width: 156.19px;
+}
+.section_top {
+  width: 1085px;
+  background: black;
+  height: 64px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.section_top_center {
+  width: 550px;
+}
+.section_top_img {
+  background: url(../icons/button.png);
+  width: 72px;
+  height: 32px;
+  background-size: cover;
+}
+.section_top_right {
+  width: 200px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.section_top_right_log {
+  width: 109.38px;
+  height: 48px;
+  border-radius: 500px;
+  background: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 17.25px;
+}
+.section_top_right_sign {
+  width: 56px;
+  height: 17px;
+  color: #A7A7A7;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+::-webkit-scrollbar {
+  width: 18px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+  height: 20px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #727272;
+  height: 20px;
+  width: 18px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a7a7a7;
+}
+
+/*# sourceMappingURL=style.css.map */

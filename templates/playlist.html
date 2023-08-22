@@ -1,0 +1,259 @@
+{% extends 'header.html' %}
+{% block css %}
+    <link rel="stylesheet" href="../../static/album/style/style.min.css">
+
+{% endblock %}
+{% block content %}
+    <div class="scrool">
+        <div class="section">
+            <div class="section_top">
+                <div class="section_top_img">
+
+                </div>
+                <div class="section_top_center">
+
+                </div>
+                <div class="section_top_right">
+                    {% if user %}
+
+                    {% else %}
+                        <div class="section_top_right_sign">
+                            Sign up
+                        </div>
+                        <div class="section_top_right_log">
+                            Log in
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="section_center">
+                <div class="section_center_left">
+                    <div class="section_center_left_photo">
+
+                    </div>
+                </div>
+                <div class="section_center_right">
+                    <div class="section_center_right_top">
+                        <div class="section_center_right_top_h1">Playlist</div>
+                    </div>
+                    <div class="section_center_right_center">
+                        Deep Focus
+                    </div>
+                    <div class="section_center_right_bottom">
+                        <div class="section_center_right_bottom_top">
+                            Keep calm and focus with ambient and post-rock music.
+                        </div>
+                        <div class="section_center_right_bottom_bottom">
+                            <ul class="section_center_right_bottom_bottom_ul">
+                                <li class="section_center_right_bottom_bottom_ul_li"
+                                    style="display: flex;justify-content: center;align-items: center;"><img
+                                        src="../../static/album/icons/spofity.png" alt=""><h5>Spofity</h5></li>
+                                <li class="section_center_right_bottom_bottom_ul_li">•</li>
+                                <li class="section_center_right_bottom_bottom_ul_li">3,970,194 likes</li>
+                                <li class="section_center_right_bottom_bottom_ul_li">•</li>
+                                <li class="section_center_right_bottom_bottom_ul_li hehehehe">250 songs, about 10 hr
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="modal_for_edit1 asas" style="position: fixed; left: 650px; width: 212px;height: 50px; border-radius: 6px;
+    -webkit-app-region: no-drag;
+    background-color: #282828;
+    -webkit-box-shadow: 0 16px 24px rgba(0,0,0,.3), 0 6px 8px rgba(0,0,0,.2);
+    box-shadow: 0 16px 24px rgba(0,0,0,.3), 0 6px 8px rgba(0,0,0,.2);
+    max-height: calc(100vh - 24px);
+    max-width: 350px;
+    min-width: 160px;
+    overflow-y: auto;
+    padding: 4px;
+    z-index: 4;
+    display: none;
+    flex-direction: column;
+
+}
+   ">
+
+                <div class="modal_for_edit_bottom"
+                     style="height: 40px;width: 212px; display: flex; justify-content:center; align-items: center; color: #FFFFFF; ">
+                    <a class="aaaaaawefwefwa" style="text-decoration: none"
+                       href=""> <span
+                            style="width: 192px; display: flex; justify-content: flex-start; align-items: center; color: #FFFFFF;">Delete</span>
+                    </a></div>
+            </div>
+            <div class="section_bottom">
+                <ul class="section_bottom_ul">
+                    <li class="section_bottom_ul_li">
+                        <div class="section_bottom_ul_li_dumaloq"><i class="fa-solid fa-play played"
+                                                                     style="font-size: 28px"></i>
+                        </div>
+                    </li>
+
+                    <li class="section_bottom_ul_li"><i class="fa-solid fa-ellipsis" style="color:
+rgba(255, 255, 255, 0.6); font-size: 44px"></i></li>
+                </ul>
+            </div>
+            <div class="section_table" style="height: 400px;">
+                <table class="section_table_table">
+                    <tr class="section_table_table_tr">
+                        <th class="section_table_table_tr_th1">#</th>
+                        <th class="section_table_table_tr_th2">Name</th>
+                        <th class="section_table_table_tr_th3">Album</th>
+                        <th class="section_table_table_tr_th4">Date added</th>
+                        <th class="section_table_table_tr_th5"><i class="fa-solid fa-clock" style="color: #b3b3b3;"></i>
+                        </th>
+                    </tr>
+                    <tbody class="tbody" style="margin-top: 10px">
+
+                    </tbody>
+                </table>
+                <div class="section_search" style="width: 100%;">
+                    <div class="section_search_top">
+                        <h2 style="    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+    margin-block: 0px;
+    font-size: 1.5rem;
+    font-weight: 700;
+    font-family: var(--font-family,CircularSpTitle,CircularSpTitle-Tall,CircularSp-Arab,CircularSp-Hebr,CircularSp-Cyrl,CircularSp-Grek,CircularSp-Deva);
+    color: white;">Let's find something for your playlist</h2>
+                        <input type="text" style="    background-color: hsla(0,0%,100%,.1);
+    border: 0;
+    border-radius: 4px;
+    color: hsla(0,0%,100%,.7);
+    height: 40px;
+    opacity: 1;
+    text-overflow: ellipsis;
+    -webkit-transition-duration: .3s;
+    transition-duration: .3s;
+    -webkit-transition-property: opacity ;
+    transition-property: opacity ;
+    -webkit-transition-timing-function: cubic-bezier(.3,0,.4,1);
+    transition-timing-function: cubic-bezier(.3,0,.4,1);
+    width: 400px;
+outline: none" class="searches">
+                    </div>
+                    <div class="section_search_bottom">
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <audio id="1">
+        <source src="../../static/music/1.mp3" class="change">
+
+    </audio>
+    <footer class="footer" style="display: flex">
+        <div class="aaa">
+            <div class="footer_left" style="display: flex">
+                <div class="footer_left_left">
+                    <img class="mud" style="width: 50px;height: 50px; object-fit: cover;"
+                         src="https://i.scdn.co/image/ab67616d000048512232e1163a3e5e2807e1c1f0" alt="">
+                </div>
+                <div class="footer_left_right">
+                    <div class="footer_left_right_top">Медуза</div>
+                    <div class="footer_left_right_bottom">MATRANG</div>
+                </div>
+                <div class="footer_left_center">
+                    <svg role="img" height="16" width="16" fill="#1ed760" aria-hidden="true" viewBox="0 0 16 16"
+                         data-encore-id="icon" class="Svg-sc-ytk21e-0 haNxPq">
+                        <path d="M15.724 4.22A4.313 4.313 0 0 0 12.192.814a4.269 4.269 0 0 0-3.622 1.13.837.837 0 0 1-1.14 0 4.272 4.272 0 0 0-6.21 5.855l5.916 7.05a1.128 1.128 0 0 0 1.727 0l5.916-7.05a4.228 4.228 0 0 0 .945-3.577z"></path>
+                    </svg>
+                </div>
+                <div class="footer_left_last">
+                    <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg">
+                        <g fill="#a7a7a7" fill-rule="evenodd">
+                            <path d="M1 3v9h14V3H1zm0-1h14a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1z"
+                                  fill-rule="nonzero"></path>
+                            <path d="M10 8h4v3h-4z"></path>
+                        </g>
+                    </svg>
+                </div>
+            </div>
+        </div>
+        <div class="footer_center" style="display: flex">
+            <div class="footer_center_top" style="display: flex;">
+                <div class="footer_center_top_left">
+                    <i class="fa-solid fa-shuffle" style="color:#A7A7A7"></i>
+                </div>
+                <div class="footer_center_top_center" style="display: flex">
+                    <div class="footer_center_top_center_left" id="prev"><i class="fa-solid fa-backward-step"
+                                                                            style="color:#fff;font-size: 18px"></i>
+                    </div>
+                    <div class="footer_center_top_center_center"><i class="fa-solid fa-play" id="main_play"
+                                                                    style="color:#000000; font-size: 18px"></i></div>
+                    <div class="footer_center_top_center_right" id="next"><i class="fa-solid fa-forward-step"
+                                                                             style="color:#fff; font-size: 18px;"></i>
+                    </div>
+                </div>
+                <div class="footer_center_rigth">
+                    <i class="fa-solid fa-repeat reaap" style="color:#A7A7A7 ;"></i>
+                </div>
+            </div>
+            <div class="footer_center_bottom">
+                <div class="footer_center_bottom_left" style="display: flex; width: 30px;">00:00</div>
+                <div class="footer_center_bottom_center">
+                    <div class="progress__filled">
+                        <div class="yumoloq"></div>
+                    </div>
+                </div>
+                <div class="footer_center_bottom_right">3:10</div>
+            </div>
+        </div>
+        <div class="bbb">
+
+
+            <div class="footer_right" style="display: flex;">
+                <div class="footer_right_first">
+                    <svg fill="#a7a7a7" role="img" height="16" width="16" aria-hidden="true" viewBox="0 0 16 16"
+                         data-encore-id="icon"
+                         class="Svg-sc-ytk21e-0 haNxPq">
+                        <path d="M11.196 8 6 5v6l5.196-3z"></path>
+                        <path d="M15.002 1.75A1.75 1.75 0 0 0 13.252 0h-10.5a1.75 1.75 0 0 0-1.75 1.75v12.5c0 .966.783 1.75 1.75 1.75h10.5a1.75 1.75 0 0 0 1.75-1.75V1.75zm-1.75-.25a.25.25 0 0 1 .25.25v12.5a.25.25 0 0 1-.25.25h-10.5a.25.25 0 0 1-.25-.25V1.75a.25.25 0 0 1 .25-.25h10.5z"></path>
+                    </svg>
+                </div>
+                <div class="footer_right_left">
+                    <svg fill="#a7a7a7" role="img" height="16" width="16" aria-hidden="true" viewBox="0 0 16 16"
+                         data-encore-id="icon"
+                         class="Svg-sc-ytk21e-0 haNxPq">
+                        <path d="M13.426 2.574a2.831 2.831 0 0 0-4.797 1.55l3.247 3.247a2.831 2.831 0 0 0 1.55-4.797zM10.5 8.118l-2.619-2.62A63303.13 63303.13 0 0 0 4.74 9.075L2.065 12.12a1.287 1.287 0 0 0 1.816 1.816l3.06-2.688 3.56-3.129zM7.12 4.094a4.331 4.331 0 1 1 4.786 4.786l-3.974 3.493-3.06 2.689a2.787 2.787 0 0 1-3.933-3.933l2.676-3.045 3.505-3.99z"></path>
+                    </svg>
+                </div>
+                <div class="footer_right_center">
+                    <svg role="img" fill="#a7a7a7" height="16" width="16" aria-hidden="true" viewBox="0 0 16 16"
+                         data-encore-id="icon"
+                         class="Svg-sc-ytk21e-0 haNxPq">
+                        <path d="M15 15H1v-1.5h14V15zm0-4.5H1V9h14v1.5zm-14-7A2.5 2.5 0 0 1 3.5 1h9a2.5 2.5 0 0 1 0 5h-9A2.5 2.5 0 0 1 1 3.5zm2.5-1a1 1 0 0 0 0 2h9a1 1 0 1 0 0-2h-9z"></path>
+                    </svg>
+                </div>
+                <div class="footer_right_right">
+                    <svg fill="#a7a7a7" role="presentation" height="16" width="16" aria-hidden="true"
+                         class="Svg-sc-ytk21e-0 haNxPq"
+                         viewBox="0 0 16 16" data-encore-id="icon">
+                        <path d="M6 2.75C6 1.784 6.784 1 7.75 1h6.5c.966 0 1.75.784 1.75 1.75v10.5A1.75 1.75 0 0 1 14.25 15h-6.5A1.75 1.75 0 0 1 6 13.25V2.75zm1.75-.25a.25.25 0 0 0-.25.25v10.5c0 .138.112.25.25.25h6.5a.25.25 0 0 0 .25-.25V2.75a.25.25 0 0 0-.25-.25h-6.5zm-6 0a.25.25 0 0 0-.25.25v6.5c0 .138.112.25.25.25H4V11H1.75A1.75 1.75 0 0 1 0 9.25v-6.5C0 1.784.784 1 1.75 1H4v1.5H1.75zM4 15H2v-1.5h2V15z"></path>
+                        <path d="M13 10a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm-1-5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"></path>
+                    </svg>
+                </div>
+                <div class="footer_right_last">
+                    <div class="footer_right_last_left">
+                        <i class="fa-solid fa-volume-high mute" style="color: #a7a7a7; margin-right: 3px"></i>
+                    </div>
+                    <div class="footer_right_last_right">
+                        <div class="progress__filled2">
+                            <div class="yumoloq2"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="../../static/playlist/script/script.js"></script>
+    <script>
+
+    </script>
+
+{% endblock %}

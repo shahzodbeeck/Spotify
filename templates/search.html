@@ -1,0 +1,373 @@
+{% extends'header.html' %}
+{% block css %}
+    <link rel="stylesheet" href="../../static/search/style/style.min.css">
+{% endblock %}
+{% block content %}
+    <div class="scrool">
+        <div class="section">
+            <div class="section_top">
+                <div class="section_top_img">
+
+                </div>
+                <div class="section_top_search">
+                    <div class="section_top_search_icon"><i class="fa-solid fa-magnifying-glass"
+                                                            style="color: #ffffff;"></i></div>
+                    <div class="section_top_search_text">What do you want to listen to?</div>
+                </div>
+                <div class="section_top_center">
+
+                </div>
+                {% if user %}
+                    {% if user.admin %}
+                        <div class="section_top_right">
+                            <div class="section_top_right_sign">
+                                Sign up
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="section_top_right">
+                            <div class="section_top_right_sign">
+                                settings
+                            </div>
+
+                        </div>
+                    {% endif %}
+                {% else %}
+                    <div class="section_top_right">
+                        <div class="section_top_right_sign">
+                            Sign up
+                        </div>
+                        <div class="section_top_right_log">
+                            Log in
+                        </div>
+                    </div>
+                {% endif %}
+
+            </div>
+        </div>
+
+        <div class="section_center">
+            <div class="section_center_top" style="position: relative;">
+                <div class="section_center_top_h1">Browse all</div>
+                {% if user %}
+                    {% if user.admin %}
+                        <div class="section_center_top_h2" style="position: absolute; top: 5px; right: 50px;"><i
+                                class="fa-solid fa-plus add" style="color: #1ED760; font-size: 40px"></i></div>
+                    {% endif %}
+                {% endif %}
+
+            </div>
+
+            <div class="section_center_center">
+                {% if user %}
+                    {% if user.admin %}
+                    {% else %}
+                        {% for genre in genres %}
+                             <a href="{{ url_for('genres',genre=genre.name) }}" style="text-decoration: none;">
+                            <div class="section_center_center_element"
+                                 data-id="{{ genre.id }}" data-photo="{{ genre.photo }}" data-name="{{ genre.name }}"
+                                 style="background: rgba({{ genre.rgba }}); position: relative;">
+
+                                <div class="section_center_center_element_top" style="margin-top: 5px;">
+                                    {{ genre.name }}
+                                </div>
+                                <div class="section_center_center_element_bottom">
+                                    <img class="section_center_center_element_bottom_img" style="width: 105px;height: 105px; object-fit: cover; -webkit-transform: rotate(25deg) translate(18%,-2%);
+    transform: rotate(25deg) translate(18%,-2%);"
+                                         src="{{ genre.photo }}">
+                                </div>
+                            </div>
+                             </a>
+                        {% endfor %}
+
+                    {% endif %}
+                {% else %}
+                    {% for genre in genres %}
+                        <a href="">
+                        <div class="section_center_center_element"
+                             data-id="{{ genre.id }}" data-photo="{{ genre.photo }}" data-name="{{ genre.name }}"
+                             style="background: rgba({{ genre.rgba }}); position: relative;">
+
+                            <div class="section_center_center_element_top" style="margin-top: 5px;">
+                                {{ genre.name }}
+                            </div>
+                            <div class="section_center_center_element_bottom">
+                                <img class="section_center_center_element_bottom_img" style="width: 105px;height: 105px; object-fit: cover; -webkit-transform: rotate(25deg) translate(18%,-2%);
+    transform: rotate(25deg) translate(18%,-2%);"
+                                     src="{{ genre.photo }}">
+                            </div>
+                        </div></a>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% if user %}
+        {% if user.admin %}
+            <style>
+                .madalni {
+                    opacity: 0;
+                    transition: 2s ease-in-out;
+                    left: 350px;
+                    width: 1200px;
+                    height: 100%;
+                    background: rgba(255, 255, 255, 0.13);
+                    position: fixed;
+                    top: 0;
+                    display: none;
+                    justify-content: center;
+                    align-items: center;
+                }
+
+                .mad {
+                    width: 450px;
+                    height: 500px;
+                    background: black;
+                    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .2);
+                    border-radius: 8px;
+                }
+
+                .mad_elements {
+                    width: 100%;
+                    height: 100%;
+                    display: flex;
+                    justify-content: space-around;
+                    align-items: center;
+                    flex-direction: column;
+                }
+
+                .mad_elements_top1 {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-around;
+                    align-items: center;
+                    width: 350px;
+                    height: 250px;
+                }
+
+                .mad_elements_top {
+                    margin-top: 20px;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-around;
+                    align-items: center;
+                    width: 350px;
+                    height: 250px;
+                    border: solid 1px white;
+                    border-radius: 6px;
+                }
+
+                .mad_elements_top_bottom {
+                    color: yellow;
+                    font-size: 20px;
+                }
+
+                .mad_elements_bottom {
+                    display: flex;
+                    justify-content: space-around;
+                    align-items: center;
+                    flex-direction: column;
+                    height: 200px;
+                }
+
+                .mad_elements_bottom_top_input {
+                    width: 250px;
+                    height: 35px;
+                    border-radius: 5px;
+                    font-size: 18px;
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: center;
+                    outline: none;
+                    border: none;
+                }
+
+                .mad_elements_bottom_bottom_button {
+                    width: 220px;
+                    font-size: 20px;
+                    font-weight: 700;
+                    font-family: Arial;
+                    color: black;
+                    height: 30px;
+                    background: #1db954;
+                    border: none;
+                    border-radius: 5px;
+                }
+
+
+                .madalni2 {
+                    opacity: 0;
+                    transition: 2s ease-in-out;
+                    left: 350px;
+                    width: 1200px;
+                    height: 100%;
+                    background: rgba(255, 255, 255, 0.13);
+                    position: fixed;
+                    top: 0;
+                    display: none;
+                    justify-content: center;
+                    align-items: center;
+                }
+
+                .mad2 {
+                    width: 450px;
+                    height: 500px;
+                    background: black;
+                    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .2);
+                    border-radius: 8px;
+                }
+
+                .mad_elements2 {
+                    width: 100%;
+                    height: 100%;
+                    display: flex;
+                    justify-content: space-around;
+                    align-items: center;
+                    flex-direction: column;
+                }
+
+                .mad_elements_top12 {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-around;
+                    align-items: center;
+                    width: 350px;
+                    height: 250px;
+                }
+
+                .mad_elements_top2 {
+                    margin-top: 20px;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-around;
+                    align-items: center;
+                    width: 350px;
+                    height: 250px;
+                    border: solid 1px white;
+                    border-radius: 6px;
+                }
+
+                .mad_elements_top_bottom2 {
+                    color: yellow;
+                    font-size: 20px;
+                }
+
+                .mad_elements_bottom2 {
+                    display: flex;
+                    justify-content: space-around;
+                    align-items: center;
+                    flex-direction: column;
+                    height: 200px;
+                }
+
+                .mad_elements_bottom_top_input2 {
+                    width: 250px;
+                    height: 35px;
+                    border-radius: 5px;
+                    font-size: 18px;
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: center;
+                    outline: none;
+                    border: none;
+                }
+
+                .mad_elements_bottom_bottom_button2 {
+                    width: 220px;
+                    font-size: 20px;
+                    font-weight: 700;
+                    font-family: Arial;
+                    color: black;
+                    height: 30px;
+                    background: #1db954;
+                    border: none;
+                    border-radius: 5px;
+                }
+            </style>
+            <div class="madalni">
+
+                <div class="mad" style="position: relative;">
+                    <form action="{{ url_for('search') }}" method="post" enctype="multipart/form-data">
+                        <i class="fa-solid fa-xmark cancel"
+                           style="position: absolute; right: 10px; color: red; font-size: 26px; top: 10px;"></i>
+                        <div class="mad_elements">
+
+                            <div class="mad_elements_top" style="position: relative;">
+                                <div class="mad_elements_top1" style="position: absolute;left: 0;top: 0; ">
+                                    <div class="mad_elements_top_top"
+                                         style="background: url(https://icones.pro/wp-content/uploads/2021/08/icone-photo-jaune.png); width: 200px;height: 200px;background-size: cover"></div>
+                                    <div class="mad_elements_top_bottom">
+                                        Click and choise picture for genre
+                                    </div>
+                                </div>
+                                <img src="" class="rasmcha" alt=""
+                                     style="width: 350px; height: 250px; position: absolute; left: 0; top: 0; z-index: 1;opacity: 0; object-fit: cover;">
+                                <input type="file"
+                                       name="photo" class="mad_elements_bottom_top_input_file"
+                                       style="width: 350px; height: 250px; position: absolute; left: 0; top: 0; z-index: 1;opacity: 0;">
+
+                            </div>
+                            <div class="mad_elements_bottom">
+                                <div class="mad_elements_bottom_top">
+                                    <input name="name" class="mad_elements_bottom_top_input" type="text"
+                                           placeholder="Enter Genre name">
+                                </div>
+                                <div class="mad_elements_bottom_bottom">
+                                    <button class="mad_elements_bottom_bottom_button">Add</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+
+            </div>
+            <div class="madalni2">
+                <div class="mad2" style="position: relative;">
+
+                    <i class="fa-solid fa-xmark cancel2"
+                       style="position: absolute; right: 10px; color: red; font-size: 26px; top: 10px;"></i>
+                    <div class="mad_elements2">
+
+                        <div class="mad_elements_top2" style="position: relative;">
+                            <div class="mad_elements_top12" style="position: absolute;left: 0;top: 0; ">
+                                <div class="mad_elements_top_top2"
+                                     style="background: url(https://icones.pro/wp-content/uploads/2021/08/icone-photo-jaune.png); width: 200px;height: 200px;background-size: cover"></div>
+                                <div class="mad_elements_top_bottom2">
+                                    Click and choise picture for genre
+                                </div>
+                            </div>
+                            <img src="" class="rasmcha2" alt=""
+                                 style="width: 350px; height: 250px; position: absolute; left: 0; top: 0; z-index: 1;opacity: 0; object-fit: cover;">
+                            <input type="file"
+                                   id="imageInput2" name="photo" class="mad_elements_bottom_top_input_file2"
+                                   style="width: 350px; height: 250px; position: absolute; left: 0; top: 0; z-index: 1;opacity: 0;">
+
+                        </div>
+                        <div class="mad_elements_bottom2">
+                            <div class="mad_elements_bottom_top2">
+                                <input id="genre" name="name" class="mad_elements_bottom_top_input2" type="text"
+                                       placeholder="Enter Genre name">
+                            </div>
+                            <div class="mad_elements_bottom_bottom2">
+                                <button onclick="uploadImage()" class="mad_elements_bottom_bottom_button2">Edit</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+            <script src="../../static/search/script/index.js">
+
+            </script>
+            <script src="../../static/search/script/fetch.js">
+
+            </script>
+        {% endif %}
+    {% endif %}
+    <script>
+        console.log(document.querySelectorAll('.pencil2'))
+    </script>
+{% endblock %}

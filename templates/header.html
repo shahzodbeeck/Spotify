@@ -1,0 +1,928 @@
+<!Doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../../static/header/style/style.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+          integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/fontawesome.min.js"
+            integrity="sha512-c41hNYfKMuxafVVmh5X3N/8DiGFFAV/tU2oeNk+upk/dfDAdcbx5FrjFOkFhe4MOLaKlujjkyR4Yn7vImrXjzQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <title>{{ user.name }} | Spotify</title>
+    {% block css %}
+
+    {% endblock %}
+</head>
+<body>
+<header>
+    <nav>
+        <div class="navs">
+            <div class="navs_top">
+                <ul class="navs_top_ul">
+                    <li class="navs_top_ul_li">
+                        <div class="navs_top_ul_li_img"></div>
+                        <a href="{{ url_for('hello_world') }}" style="text-decoration: none;">
+                            <div class="navs_top_ul_li_text">Home</div>
+                        </a>
+                    </li>
+                    <a href="{{ url_for("search") }}" class="navs_top_ul_li" style="text-decoration: none">
+                        <div class="navs_top_ul_li_img" style="background: url(../../static/header/icons/search.png)">
+
+                        </div>
+
+
+                        <div class="navs_top_ul_li_text">Search</div>
+                    </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="navs_bottom">
+                <div class="navs_bottom_top">
+                    <div class="navs_bottom_top_left">
+                        <div class="navs_bottom_top_left_Img">
+
+                        </div>
+                        {% if user %}
+                            {% if user.admin or user.artist or user.admin and user.artist %}
+                                <div class="navs_bottom_top_left_text">
+                                    Your Library
+                                </div>
+                            {% endif %}
+                        {% else %}
+                            <div class="navs_bottom_top_left_text">
+                                Your Library
+                            </div>
+                        {% endif %}
+                    </div>
+                    {% if user %}
+                        {% if user.admin or user.artist or user.admin and user.artist %}
+                            <div class="navs_bottom_top_right">
+                                <div class="navs_bottom_top_right_img album_create_for_mus">
+
+                                </div>
+                            </div>
+
+                        {% else %}
+                            <div class="navs_bottom_top_right">
+                                <div class="navs_bottom_top_right_img playlist_create_for_mus">
+
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% else %}
+                        <div class="navs_bottom_top_right">
+                            <div class="navs_bottom_top_right_img">
+
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+                {% if user %}
+                    {% if user.admin or user.artist %}
+                        {% if albums %}
+                            <div class="modal_for_edit" style="position: fixed; left: 150px; width: 212px;height: 100px; border-radius: 6px;
+    -webkit-app-region: no-drag;
+    background-color: #282828;
+    -webkit-box-shadow: 0 16px 24px rgba(0,0,0,.3), 0 6px 8px rgba(0,0,0,.2);
+    box-shadow: 0 16px 24px rgba(0,0,0,.3), 0 6px 8px rgba(0,0,0,.2);
+    max-height: calc(100vh - 24px);
+    max-width: 350px;
+    min-width: 160px;
+    overflow-y: auto;
+    padding: 4px;
+    z-index: 4;
+    display: none;
+    flex-direction: column;
+}
+   ">
+                                <div class="modal_for_edit_top"
+                                     style="height: 40px;width: 212px; display: flex; justify-content:center; align-items: center ;color: #FFFFFF;">
+                                    <span class="edtsss"
+                                          style="width: 192px; display: flex; justify-content: flex-start; align-items: center; color: #FFFFFF;">Edit details</span>
+                                </div>
+                                <div class="modal_for_edit_bottom"
+                                     style="height: 40px;width: 212px; display: flex; justify-content:center; align-items: center; color: #FFFFFF; ">
+                                    <a class="aaaaa" style="text-decoration: none"
+                                       href=""> <span
+                                            style="width: 192px; display: flex; justify-content: flex-start; align-items: center; color: #FFFFFF;">Delete</span>
+                                    </a></div>
+                            </div>
+                            <div class="elem">
+                                {% for album in albums %}
+
+                                    <a href="{{ url_for('album_name',name=album.name) }}" style="text-decoration: none">
+                                        <div class="albums"
+                                             style="width: 330px; display: flex; flex-direction: column; align-items: center;">
+                                            <div class="elemenst"
+                                                 style="width: 320px;height: 64px; display: flex; align-items: center;"
+                                                 data-id="{{ album.id }}" data-name="{{ album.name }}"
+                                                 data-photo="{{ album.photo }}" data-caption="{{ album.caption }}">
+                                                <div class="elemenst_left"
+                                                     style="width: 60px; height: 64px; display: flex; justify-content: center; align-items: center;">
+                                                    <div class="elemenst_left_photo"
+                                                         style="width: 48px; height: 48px; background: url({{ album.photo }}) ; background-size: cover;"></div>
+                                                </div>
+                                                <div class="elemenst_right"
+                                                     style="width: 243px; height: 48px; display: flex; justify-content: space-around; align-items: flex-start; flex-direction: column;">
+                                                    <div class="elemenst_right_top" style="    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+    margin-block: 0px;
+    font-size: 1rem;
+    font-weight: 400;
+    font-family: CircularSp,CircularSp-Arab,CircularSp-Hebr,CircularSp-Cyrl,CircularSp-Grek,CircularSp-Deva,sans-serif;
+    color: #1ed760">
+                                                        {{ album.name }}
+                                                    </div>
+                                                    <div class="elemenst_right_bottom" style="    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+    margin-block: 0px;
+    font-size: 0.8125rem;
+    font-weight: 400;
+    font-family: CircularSp,CircularSp-Arab,CircularSp-Hebr,CircularSp-Cyrl,CircularSp-Grek,CircularSp-Deva,sans-serif;
+    color: #6a6a6a">
+                                                        Album <span>•</span> {{ album.users.name }}
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </a>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            <div class="navs_bottom_center">
+                                <div class="navs_bottom_center_div">
+                                    <div class="navs_bottom_center_div_text1">
+                                        Create your first album
+                                    </div>
+                                    <div class="navs_bottom_center_div_text2">
+                                        It's easy, we'll help you
+                                    </div>
+                                    <button class="navs_bottom_center_div_button album_create_for_mus">Create album
+                                    </button>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% else %}
+                        {% if playlist %}
+                            <div class="modal_for_edit asas" style="position: fixed; left: 150px; width: 212px;height: 100px; border-radius: 6px;
+    -webkit-app-region: no-drag;
+    background-color: #282828;
+    -webkit-box-shadow: 0 16px 24px rgba(0,0,0,.3), 0 6px 8px rgba(0,0,0,.2);
+    box-shadow: 0 16px 24px rgba(0,0,0,.3), 0 6px 8px rgba(0,0,0,.2);
+    max-height: calc(100vh - 24px);
+    max-width: 350px;
+    min-width: 160px;
+    overflow-y: auto;
+    padding: 4px;
+    z-index: 4;
+    display: none;
+    flex-direction: column;
+
+}
+   ">
+                                <div class="modal_for_edit_top"
+                                     style="height: 40px;width: 212px; display: flex; justify-content:center; align-items: center ;color: #FFFFFF;">
+                                    <span class="edtsss sssssssasasqwq"
+                                          style="width: 192px; display: flex; justify-content: flex-start; align-items: center; color: #FFFFFF;">Edit details</span>
+                                </div>
+                                <div class="modal_for_edit_bottom"
+                                     style="height: 40px;width: 212px; display: flex; justify-content:center; align-items: center; color: #FFFFFF; ">
+                                    <a class="aaaaaaa" style="text-decoration: none"
+                                       href=""> <span
+                                            style="width: 192px; display: flex; justify-content: flex-start; align-items: center; color: #FFFFFF;">Delete</span>
+                                    </a></div>
+                            </div>
+                            <div class="elem">
+                                <a href="{{ url_for('liked') }}" style="text-decoration: none">
+                                    <div class="albums"
+                                         style="width: 330px; display: flex; flex-direction: column; align-items: center;">
+                                        <div class="elemenst element2"
+                                             style="width: 320px;height: 64px; display: flex; align-items: center;"
+
+                                        >
+                                            <div class="elemenst_left"
+                                                 style="width: 60px; height: 64px; display: flex; justify-content: center; align-items: center;">
+                                                <div class="elemenst_left_photo"
+                                                     style="width: 48px; height: 48px; background: url(https://misc.scdn.co/liked-songs/liked-songs-64.png) ; background-size: cover;"></div>
+                                            </div>
+                                            <div class="elemenst_right"
+                                                 style="width: 243px; height: 48px; display: flex; justify-content: space-around; align-items: flex-start; flex-direction: column;">
+                                                <div class="elemenst_right_top" style="    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+    margin-block: 0px;
+    font-size: 1rem;
+    font-weight: 400;
+    font-family: CircularSp,CircularSp-Arab,CircularSp-Hebr,CircularSp-Cyrl,CircularSp-Grek,CircularSp-Deva,sans-serif;
+    color: #1ed760">
+                                                    Liked
+                                                </div>
+                                                <div class="elemenst_right_bottom" style="    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+    margin-block: 0px;
+    font-size: 0.8125rem;
+    font-weight: 400;
+    font-family: CircularSp,CircularSp-Arab,CircularSp-Hebr,CircularSp-Cyrl,CircularSp-Grek,CircularSp-Deva,sans-serif;
+    color: #6a6a6a">
+                                                    Playlist <span>•</span> {{ user.name }}
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </a>
+                                {% for album in playlist %}
+                                    <a href="{{ url_for('playlist_name',name=album.name) }}"
+                                       style="text-decoration: none">
+                                        <div class="albums"
+                                             style="width: 330px; display: flex; flex-direction: column; align-items: center;">
+                                            <div class="elemenst element2 element3"
+                                                 style="width: 320px;height: 64px; display: flex; align-items: center;"
+                                                 data-id="{{ album.id }}" data-name="{{ album.name }}"
+                                                 data-photo="{{ album.photo }}" data-caption="{{ album.caption }}">
+                                                <div class="elemenst_left"
+                                                     style="width: 60px; height: 64px; display: flex; justify-content: center; align-items: center;">
+                                                    <div class="elemenst_left_photo"
+                                                         style="width: 48px; height: 48px; background: url({{ album.photo }}) ; background-size: cover;"></div>
+                                                </div>
+                                                <div class="elemenst_right"
+                                                     style="width: 243px; height: 48px; display: flex; justify-content: space-around; align-items: flex-start; flex-direction: column;">
+                                                    <div class="elemenst_right_top" style="    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+    margin-block: 0px;
+    font-size: 1rem;
+    font-weight: 400;
+    font-family: CircularSp,CircularSp-Arab,CircularSp-Hebr,CircularSp-Cyrl,CircularSp-Grek,CircularSp-Deva,sans-serif;
+    color: #1ed760">
+                                                        {{ album.name }}
+                                                    </div>
+                                                    <div class="elemenst_right_bottom" style="    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+    margin-block: 0px;
+    font-size: 0.8125rem;
+    font-weight: 400;
+    font-family: CircularSp,CircularSp-Arab,CircularSp-Hebr,CircularSp-Cyrl,CircularSp-Grek,CircularSp-Deva,sans-serif;
+    color: #6a6a6a">
+                                                        Playlist <span>•</span> {{ album.users.name }}
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </a>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            <div class="navs_bottom_center">
+                                <div class="navs_bottom_center_div">
+                                    <div class="navs_bottom_center_div_text1">
+                                        Create your first playlist
+                                    </div>
+                                    <div class="navs_bottom_center_div_text2">
+                                        It's easy, we'll help you
+                                    </div>
+                                    <button class="navs_bottom_center_div_button playlist_create_for_mus">Create
+                                        playlist
+                                    </button>
+                                </div>
+                            </div>
+                        {% endif %}
+
+                    {% endif %}
+
+
+                {% endif %}
+
+            </div>
+
+        </div>
+    </nav>
+</header>
+
+{% if user %}
+    {% if user.admin or user.artis %}
+        <style>
+            .madalni_for_album {
+                display: none;
+                justify-content: center;
+                align-items: center;
+                position: fixed;
+                left: 370px;
+                top: 0;
+                background: rgba(167, 167, 167, 0.24);
+                z-index: 1;
+                width: 1180px;
+                height: 100%;
+
+            }
+
+            .madalni_for_album_center {
+                width: 450px;
+                height: 550px;
+                background: black;
+                border-radius: 6px;
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                flex-direction: column;
+            }
+
+            .madalni_for_album2 {
+                display: none;
+                justify-content: center;
+                align-items: center;
+                position: fixed;
+                left: 370px;
+                top: 0;
+                background: rgba(167, 167, 167, 0.24);
+                z-index: 1;
+                width: 1180px;
+                height: 100%;
+
+            }
+
+            .madalni_for_album_center2 {
+                width: 450px;
+                height: 550px;
+                background: black;
+                border-radius: 6px;
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                flex-direction: column;
+            }
+        </style>
+        <div class="madalni_for_album">
+            <form action="{{ url_for('album_add') }}" method="post" enctype="multipart/form-data">
+                <div class="madalni_for_album_center" style="position: relative">
+                    <i class="fa-solid fa-xmark cancelen"
+                       style="color: red; font-size: 30px; position: absolute; top: 0; right: 0;"></i>
+                    <div class="madalni_for_album_center_top">
+                        <div class="madalni_for_album_center_top_element"
+                             style="width: 400px; height: 250px; border: 0.5px solid white; border-radius: 5px; display: flex; justify-content: center; align-items: center;position: relative; ">
+                            <div class="divs"
+                                 style="background: url(https://icones.pro/wp-content/uploads/2021/08/icone-photo-jaune.png); background-size: cover; width: 280px;height: 200px; background-position: center; position: absolute ">
+                            </div>
+                            <img class="madalni_for_album_center_top_element_rasm" src=""
+                                 style="display: none; opacity: 0; width: 400px; height: 250px; position: absolute; left: 0;top: 0; object-fit: cover; z-index: 1">
+                            <input type="file" name="photo" class="madalni_for_album_center_top_element_rasm_input"
+                                   style="position: absolute; top: 0;left: 0; width: 380px ; height: 220px; z-index: 1; opacity: 0;display: flex">
+
+
+                        </div>
+                    </div>
+                    <div class="madalni_for_album_center_center"
+                         style="width: 400px;height: 50px;display: flex; justify-content: space-around; align-items: center; ">
+                        <div class="madalni_for_album_center_center_top"
+                             style="display: flex; justify-content: space-around; align-items: center; flex-direction: column">
+                            <div class="madalni_for_album_center_center_top_h1"
+                                 style="font-size: 17px; font-family: Arial; font-weight: 500; color: #FFFFFF; width:  156.4px;">
+                                Album name
+                            </div>
+                            <input name="name"
+                                   style="width: 156.4px; height: 25px;border-radius: 6px; border: none; outline: none;font-size: 14px ;font-family: Arial;"
+                                   type="text">
+                        </div>
+                        <div class="madalni_for_album_center_center_bottom"
+                             style="display: flex; justify-content: space-around; align-items: center; flex-direction: column">
+                            <div class="madalni_for_album_center_center_top_h1"
+                                 style="font-size: 17px; font-family: Arial; font-weight: 500; color: #FFFFFF; width:  156.4px;">
+                                Album singers name
+                            </div>
+                            <select style="width: 156.4px; height: 25px;border-radius: 6px; border: none; outline: none;font-size: 14px ;font-family: Arial;"
+                                    name="artist" id="">
+                                {% for artist in artist %}
+                                    <option value="{{ artist.id }}">{{ artist.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="madalni_for_album_center_bottom"
+                         style="width: 400px;height: 100px;display: flex; justify-content: space-around; align-items: center; ">
+                        <div class="madalni_for_album_center_bottom_top">
+                            <div class="madalni_for_album_center_center_top_h1"
+                                 style="font-size: 17px; font-family: Arial; font-weight: 500; color: #FFFFFF; width:  156.4px;">
+                                Album genre
+                            </div>
+                            <select style="width: 156.4px; height: 25px;border-radius: 6px; border: none; outline: none;font-size: 14px ;font-family: Arial;"
+                                    name="genre" id="">
+                                {% for genre in genres %}
+                                    <option value="{{ genre.id }}">{{ genre.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="madalni_for_album_center_bottom_botttom"
+                             style="display: flex; justify-content: space-around; align-items: center; flex-direction: column">
+                            <div class="madalni_for_album_center_center_top_h1"
+                                 style="font-size: 17px; font-family: Arial; font-weight: 500; color: #FFFFFF; width:  156.4px;">
+                                Album description
+                            </div>
+                            <input name="caption"
+                                   style="width: 156.4px; height: 25px;border-radius: 6px; border: none; outline: none;font-size: 14px ;font-family: Arial;"
+                                   type="text">
+                        </div>
+                    </div>
+                    <div class="madalni_button_div" style="height: 50px;">
+
+                        <button class="madalni_button_button"
+                                style="border: none; border-radius: 5px; width: 120px;height: 30px; background: #1ED760; display: flex;justify-content: center; align-items: center; font-weight: 500; font-family: Arial; font-size: 17px">
+                            Add
+                        </button>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+        <div class="madalni_for_album2">
+
+            <div class="madalni_for_album_center2" style="position: relative">
+                <i class="fa-solid fa-xmark cancelen2"
+                   style="color: red; font-size: 30px; position: absolute; top: 0; right: 0;"></i>
+                <div class="madalni_for_album_center_top2">
+                    <div class="madalni_for_album_center_top_element2"
+                         style="width: 400px; height: 250px; border: 0.5px solid white; border-radius: 5px; display: flex; justify-content: center; align-items: center;position: relative; ">
+                        <div class="divs2"
+                             style="background: url(https://icones.pro/wp-content/uploads/2021/08/icone-photo-jaune.png); background-size: cover; width: 280px;height: 200px; background-position: center; position: absolute ">
+                        </div>
+                        <img class="madalni_for_album_center_top_element_rasm2" src=""
+                             style="display: none; opacity: 0; width: 400px; height: 250px; position: absolute; left: 0;top: 0; object-fit: cover; z-index: 1">
+                        <input type="file" name="photo" class="madalni_for_album_center_top_element_rasm_input2"
+                               style="position: absolute; top: 0;left: 0; width: 380px ; height: 220px; z-index: 1; opacity: 0;display: flex">
+
+
+                    </div>
+                </div>
+                <div class="madalni_for_album_center_center2"
+                     style="width: 400px;height: 50px;display: flex; justify-content: space-around; align-items: center; ">
+                    <div class="madalni_for_album_center_center_top2"
+                         style="display: flex; justify-content: space-around; align-items: center; flex-direction: column">
+                        <div class="madalni_for_album_center_center_top_h12"
+                             style="font-size: 17px; font-family: Arial; font-weight: 500; color: #FFFFFF; width:  156.4px;">
+                            Album name
+                        </div>
+                        <input name="name"
+                               class="namaaaaaa"
+                               style="width: 156.4px; height: 25px;border-radius: 6px; border: none; outline: none;font-size: 14px ;font-family: Arial;"
+                               type="text">
+                    </div>
+
+                </div>
+                <div class="madalni_for_album_center_bottom2"
+                     style="width: 400px;height: 100px;display: flex; justify-content: space-around; align-items: center; ">
+
+                    <div class="madalni_for_album_center_bottom_botttom2"
+                         style="display: flex; justify-content: space-around; align-items: center; flex-direction: column">
+                        <div class="madalni_for_album_center_center_top_h12"
+                             style="font-size: 17px; font-family: Arial; font-weight: 500; color: #FFFFFF; width:  156.4px;">
+                            Album description
+                        </div>
+                        <input name="caption"
+                               class="capppp"
+                               style="width: 156.4px; height: 25px;border-radius: 6px; border: none; outline: none;font-size: 14px ;font-family: Arial;"
+                               type="text">
+                    </div>
+                </div>
+                <div class="madalni_button_div2" style="height: 50px;">
+
+                    <button class="madalni_button_button2"
+                            onclick="uploadImage()"
+                            style="border: none; border-radius: 5px; width: 120px;height: 30px; background: #1ED760; display: flex;justify-content: center; align-items: center; font-weight: 500; font-family: Arial; font-size: 17px">
+                        Edit
+                    </button>
+                </div>
+
+            </div>
+        </div>
+        <script>
+            adddded = document.querySelectorAll('.album_create_for_mus')
+            adddded.forEach((item, id) => {
+                item.addEventListener('click', () => {
+                    document.querySelector('.madalni_for_album').style.display = `flex`
+                })
+            })
+            document.querySelector('.cancelen').addEventListener('click', () => {
+                document.querySelector('.madalni_for_album').style.display = `none`
+            })
+            let inputss1s = document.querySelector('.madalni_for_album_center_top_element_rasm_input'),
+                rasmchaz = document.querySelector('.madalni_for_album_center_top_element_rasm')
+            inputss1s.addEventListener('change', () => {
+                let file = inputss1s.files[0];
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const content = e.target.result;
+                    rasmchaz.src = `${content}`
+                    rasmchaz.style.display = `flex`
+                    rasmchaz.style.opacity = `1`
+                }
+                reader.readAsDataURL(file);
+
+            });
+            document.querySelectorAll('.elemenst').forEach((item, id) => {
+                item.addEventListener("contextmenu", function (event) {
+                    event.preventDefault();
+                    document.querySelector('.modal_for_edit').style.display = `flex`
+                    document.querySelector('.aaaaa').href = `http://127.0.0.1:5000/delete_album/${document.querySelectorAll('.elemenst')[id].getAttribute('data-id')}`
+                })
+            });
+            document.querySelector('nav').addEventListener('click', () => {
+                document.querySelector('.modal_for_edit').style.display = `none`
+            })
+            let idla = null
+            adddded2 = document.querySelectorAll('.edtsss'),
+                namaaa = document.querySelector('.namaaaaaa'),
+                captioon = document.querySelector('.capppp'),
+                rasmchaz2 = document.querySelector('.madalni_for_album_center_top_element_rasm2')
+            adddded2.forEach((item, id) => {
+                item.addEventListener('click', () => {
+                    document.querySelector('.madalni_for_album2').style.display = `flex`
+                    namaaa.value = `${document.querySelectorAll('.elemenst')[id].getAttribute('data-name')}`
+                    captioon.value = `${document.querySelectorAll('.elemenst')[id].getAttribute('data-caption')}`
+                    rasmchaz2.src = `${document.querySelectorAll('.elemenst')[id].getAttribute('data-photo')}`
+                    rasmchaz2.style.display = `flex`
+                    rasmchaz2.style.opacity = `1`
+                    idla = document.querySelectorAll('.elemenst')[id].getAttribute('data-id')
+                })
+            })
+            document.querySelector('.cancelen2').addEventListener('click', () => {
+                document.querySelector('.madalni_for_album2').style.display = `none`
+            })
+            let inputss1s2 = document.querySelector('.madalni_for_album_center_top_element_rasm_input2')
+            inputss1s2.addEventListener('change', () => {
+                let file = inputss1s2.files[0];
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const content = e.target.result;
+                    rasmchaz2.src = `${content}`
+                    rasmchaz2.style.display = `flex`
+                    rasmchaz2.style.opacity = `1`
+                }
+                reader.readAsDataURL(file);
+
+            });
+
+            function uploadImage() {
+                const file = inputss1s2.files[0];
+                const formData = new FormData();
+                if (file) {
+                    formData.append('image', file);
+                }
+                formData.append('name', namaaa.value);
+                formData.append('caption', captioon.value);
+                formData.append('id', idla);
+                fetch('/edit_album', {
+                    method: 'POST', body: formData,
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        document.querySelector('.madalni_for_album2').style.display = `none`
+                        const table = document.querySelector('.elem')
+                        table.innerHTML = ``
+                        let shs = data.result
+                        shs.forEach((item, id) => {
+                            table.innerHTML += `  <div class="elemenst"
+                                         style="width: 320px;height: 64px; display: flex; align-items: center;"
+                                         data-id="${shs[id].id}" data-name="${shs[id].name}"
+                                         data-photo="${shs[id].photo}" data-caption="${shs[id].caption}">
+                                        <div class="elemenst_left"
+                                             style="width: 60px; height: 64px; display: flex; justify-content: center; align-items: center;">
+                                            <div class="elemenst_left_photo"
+                                                 style="width: 48px; height: 48px; background: url(${shs[id].photo}) ; background-size: cover;"></div>
+                                        </div>
+                                        <div class="elemenst_right"
+                                             style="width: 243px; height: 48px; display: flex; justify-content: space-around; align-items: flex-start; flex-direction: column;">
+                                            <div class="elemenst_right_top" style="    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+    margin-block: 0px;
+    font-size: 1rem;
+    font-weight: 400;
+    font-family: CircularSp,CircularSp-Arab,CircularSp-Hebr,CircularSp-Cyrl,CircularSp-Grek,CircularSp-Deva,sans-serif;
+    color: #1ed760">
+                                            ${shs[id].name}
+                                            </div>
+                                            <div class="elemenst_right_bottom" style="    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+    margin-block: 0px;
+    font-size: 0.8125rem;
+    font-weight: 400;
+    font-family: CircularSp,CircularSp-Arab,CircularSp-Hebr,CircularSp-Cyrl,CircularSp-Grek,CircularSp-Deva,sans-serif;
+    color: #6a6a6a">
+                                                Album <span>•</span> ${shs[id].user}
+                                            </div>
+                                        </div>
+                                    </div>`;
+
+                        })
+
+
+                    })
+            }
+
+        </script>
+    {% endif %}
+    <style>
+        .madalni_for_playlist_add {
+            z-index: 2;
+            width: 1153px;
+            height: 100%;
+            position: fixed;
+            background: rgba(29, 185, 84, 0.02);
+            left: 365px;
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .madalni_for_playlist_add_mad {
+            position: relative;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-direction: column;
+            width: 500px;
+            height: 600px;
+            border-radius: 6px;
+            background: black;
+        }
+
+        .madalni_for_playlist_add3 {
+            z-index: 2;
+            width: 1153px;
+            height: 100%;
+            position: fixed;
+            background: rgba(29, 185, 84, 0.02);
+            left: 365px;
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .madalni_for_playlist_add_mad3 {
+            position: relative;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-direction: column;
+            width: 500px;
+            height: 600px;
+            border-radius: 6px;
+            background: black;
+        }
+    </style>
+    <div class="madalni_for_playlist_add">
+        <form action="{{ url_for('play_add') }}" method="post" enctype="multipart/form-data">
+            <div class="madalni_for_playlist_add_mad">
+                <i class="fa-solid fa-xmark cancelen2lest"
+                   style="color: red; font-size: 30px; position: absolute; top: 0; right: 0;"></i>
+                <div class="madalni_for_album_center_top2">
+                    <div class="madalni_for_album_center_top_element2"
+                         style="width: 400px; height: 250px; border: 0.5px solid white; border-radius: 5px; display: flex; justify-content: center; align-items: center;position: relative; ">
+                        <div class="divs2"
+                             style="background: url(https://icones.pro/wp-content/uploads/2021/08/icone-photo-jaune.png); background-size: cover; width: 280px;height: 200px; background-position: center; position: absolute ">
+                        </div>
+                        <img class="madalni_for_album_center_top_element_rasm2lar" src=""
+                             style="display: none; opacity: 0; width: 400px; height: 250px; position: absolute; left: 0;top: 0; object-fit: cover; z-index: 1">
+                        <input type="file" name="photo" class="madalni_for_album_center_top_element_rasm_input2LA"
+                               style="position: absolute; top: 0;left: 0; width: 380px ; height: 220px; z-index: 1; opacity: 0;display: flex">
+
+
+                    </div>
+                </div>
+                <div class="madalni_for_album_center_center2"
+                     style="width: 400px;height: 50px;display: flex; justify-content: space-around; align-items: center; ">
+                    <div class="madalni_for_album_center_center_top2"
+                         style="display: flex; justify-content: space-around; align-items: center; flex-direction: column">
+                        <div class="madalni_for_album_center_center_top_h12"
+                             style="font-size: 17px; font-family: Arial; font-weight: 500; color: #FFFFFF; width:  156.4px;">
+                            Playlist name
+                        </div>
+                        <input name="name"
+                               class="namaaaaaa"
+                               style="width: 156.4px; height: 25px;border-radius: 6px; border: none; outline: none;font-size: 14px ;font-family: Arial;"
+                               type="text">
+                    </div>
+
+                </div>
+                <div class="madalni_for_album_center_bottom2"
+                     style="width: 400px;height: 100px;display: flex; justify-content: space-around; align-items: center; ">
+
+                    <div class="madalni_for_album_center_bottom_botttom2"
+                         style="display: flex; justify-content: space-around; align-items: center; flex-direction: column">
+                        <div class="madalni_for_album_center_center_top_h12"
+                             style="font-size: 17px; font-family: Arial; font-weight: 500; color: #FFFFFF; width:  156.4px;">
+                            Playlist description
+                        </div>
+                        <input name="caption"
+                               class="capppp"
+                               style="width: 156.4px; height: 25px;border-radius: 6px; border: none; outline: none;font-size: 14px ;font-family: Arial;"
+                               type="text">
+                    </div>
+                </div>
+                <div class="madalni_button_div2" style="height: 50px;">
+
+                    <button class="madalni_button_button2"
+                            onclick="uploadImage()"
+                            style="border: none; border-radius: 5px; width: 120px;height: 30px; background: #1ED760; display: flex;justify-content: center; align-items: center; font-weight: 500; font-family: Arial; font-size: 17px">
+                        Add
+                    </button>
+                </div>
+
+            </div>
+        </form>
+    </div>
+    <div class="madalni_for_playlist_add3">
+        <div class="madalni_for_playlist_add_mad3">
+            <i class="fa-solid fa-xmark cancelen2lest3ss"
+               style="color: red; font-size: 30px; position: absolute; top: 0; right: 0;"></i>
+            <div class="madalni_for_album_center_top23">
+                <div class="madalni_for_album_center_top_element23"
+                     style="width: 400px; height: 250px; border: 0.5px solid white; border-radius: 5px; display: flex; justify-content: center; align-items: center;position: relative; ">
+                    <div class="divs2"
+                         style="background: url(https://icones.pro/wp-content/uploads/2021/08/icone-photo-jaune.png); background-size: cover; width: 280px;height: 200px; background-position: center; position: absolute ">
+                    </div>
+                    <img class="madalni_for_album_center_top_element_rasm2lar3" src=""
+                         style="display: none; opacity: 0; width: 400px; height: 250px; position: absolute; left: 0;top: 0; object-fit: cover; z-index: 1">
+                    <input type="file" name="photo" class="madalni_for_album_center_top_element_rasm_input2LA3s"
+                           style="position: absolute; top: 0;left: 0; width: 380px ; height: 220px; z-index: 1; opacity: 0;display: flex">
+
+
+                </div>
+            </div>
+            <div class="madalni_for_album_center_center23"
+                 style="width: 400px;height: 50px;display: flex; justify-content: space-around; align-items: center; ">
+                <div class="madalni_for_album_center_center_top23"
+                     style="display: flex; justify-content: space-around; align-items: center; flex-direction: column">
+                    <div class="madalni_for_album_center_center_top_h123"
+                         style="font-size: 17px; font-family: Arial; font-weight: 500; color: #FFFFFF; width:  156.4px;">
+                        Playlist name
+                    </div>
+                    <input name="name"
+                           class="namaaaaaa3"
+                           style="width: 156.4px; height: 25px;border-radius: 6px; border: none; outline: none;font-size: 14px ;font-family: Arial;"
+                           type="text">
+                </div>
+
+            </div>
+            <div class="madalni_for_album_center_bottom23"
+                 style="width: 400px;height: 100px;display: flex; justify-content: space-around; align-items: center; ">
+
+                <div class="madalni_for_album_center_bottom_botttom23"
+                     style="display: flex; justify-content: space-around; align-items: center; flex-direction: column">
+                    <div class="madalni_for_album_center_center_top_h123"
+                         style="font-size: 17px; font-family: Arial; font-weight: 500; color: #FFFFFF; width:  156.4px;">
+                        Playlist description
+                    </div>
+                    <input name="caption"
+                           class="capppp3"
+                           style="width: 156.4px; height: 25px;border-radius: 6px; border: none; outline: none;font-size: 14px ;font-family: Arial;"
+                           type="text">
+                </div>
+            </div>
+            <div class="madalni_button_div23" style="height: 50px;">
+
+                <button class="madalni_button_button23"
+                        onclick="uploadImage2()"
+                        style="border: none; border-radius: 5px; width: 120px;height: 30px; background: #1ED760; display: flex;justify-content: center; align-items: center; font-weight: 500; font-family: Arial; font-size: 17px">
+                    Edit
+                </button>
+            </div>
+
+        </div>
+        </form>
+    </div>
+    <script>
+        let inputss1slar = document.querySelector('.madalni_for_album_center_top_element_rasm_input2LA'),
+            rasmchazlR = document.querySelector('.madalni_for_album_center_top_element_rasm2lar')
+        inputss1slar.addEventListener('change', () => {
+            let file = inputss1slar.files[0];
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                const content = e.target.result;
+                rasmchazlR.src = `${content}`
+                rasmchazlR.style.display = `flex`
+                rasmchazlR.style.opacity = `1`
+            }
+            reader.readAsDataURL(file);
+
+        });
+        document.querySelectorAll('.playlist_create_for_mus').forEach((item, id) => {
+            item.addEventListener('click', () => {
+                document.querySelector('.madalni_for_playlist_add').style.display = `flex`
+            })
+
+        })
+        document.querySelector('.cancelen2lest').addEventListener('click', () => {
+            document.querySelector('.madalni_for_playlist_add').style.display = `none`
+        })
+        document.querySelectorAll('.element3').forEach((item, id) => {
+            item.addEventListener("contextmenu", function (event) {
+                event.preventDefault();
+                document.querySelector('.modal_for_edit').style.display = `flex`
+                document.querySelector('.aaaaaaa').href = `http://127.0.0.1:5000/delete_play/${document.querySelectorAll('.element3')[id].getAttribute('data-id')}`
+            })
+        });
+        document.querySelector('nav').addEventListener('click', () => {
+            document.querySelector('.modal_for_edit').style.display = `none`
+        })
+        let idla = null
+        adddded2 = document.querySelectorAll('.sssssssasasqwq'),
+            namaaa = document.querySelector('.namaaaaaa3'),
+            captioon = document.querySelector('.capppp3'),
+            rasmchaz2 = document.querySelector('.madalni_for_album_center_top_element_rasm2lar3')
+        adddded2.forEach((item, id) => {
+            item.addEventListener('click', () => {
+                document.querySelector('.madalni_for_playlist_add3').style.display = `flex`
+                namaaa.value = `${document.querySelectorAll('.element3')[id].getAttribute('data-name')}`
+                captioon.value = `${document.querySelectorAll('.element3')[id].getAttribute('data-caption')}`
+                rasmchaz2.src = `${document.querySelectorAll('.element3')[id].getAttribute('data-photo')}`
+                rasmchaz2.style.display = `flex`
+                rasmchaz2.style.opacity = `1`
+                idla = document.querySelectorAll('.element3')[id].getAttribute('data-id')
+            })
+        })
+        document.querySelector('.cancelen2lest3ss').addEventListener('click', () => {
+            document.querySelector('.madalni_for_playlist_add3').style.display = `none`
+        })
+        let inputss1s2 = document.querySelector('.madalni_for_album_center_top_element_rasm_input2LA3s')
+        inputss1s2.addEventListener('change', () => {
+            let file = inputss1s2.files[0];
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                const content = e.target.result;
+                rasmchaz2.src = `${content}`
+                rasmchaz2.style.display = `flex`
+                rasmchaz2.style.opacity = `1`
+            }
+            reader.readAsDataURL(file);
+
+        });
+
+        function uploadImage2() {
+            const file = inputss1s2.files[0];
+            const formData = new FormData();
+            if (file) {
+                formData.append('image', file);
+            }
+            formData.append('name', namaaa.value);
+            formData.append('caption', captioon.value);
+            formData.append('id', idla);
+            fetch('/edit_play', {
+                method: 'POST', body: formData,
+            })
+                .then(response => response.json())
+                .then(data => {
+                    document.querySelector('.madalni_for_playlist_add3').style.display = `none`
+                    const table = document.querySelector('.elem')
+                    table.innerHTML = ``
+                    let shs = data.result
+                    shs.forEach((item, id) => {
+                        table.innerHTML += `  <div class="elemenst element2 element3"
+                                         style="width: 320px;height: 64px; display: flex; align-items: center;"
+                                         data-id="${shs[id].id}" data-name="${shs[id].name}"
+                                         data-photo="${shs[id].photo}" data-caption="${shs[id].caption}">
+                                        <div class="elemenst_left"
+                                             style="width: 60px; height: 64px; display: flex; justify-content: center; align-items: center;">
+                                            <div class="elemenst_left_photo"
+                                                 style="width: 48px; height: 48px; background: url(${shs[id].photo}) ; background-size: cover;"></div>
+                                        </div>
+                                        <div class="elemenst_right"
+                                             style="width: 243px; height: 48px; display: flex; justify-content: space-around; align-items: flex-start; flex-direction: column;">
+                                            <div class="elemenst_right_top" style="    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+    margin-block: 0px;
+    font-size: 1rem;
+    font-weight: 400;
+    font-family: CircularSp,CircularSp-Arab,CircularSp-Hebr,CircularSp-Cyrl,CircularSp-Grek,CircularSp-Deva,sans-serif;
+    color: #1ed760">
+                                            ${shs[id].name}
+                                            </div>
+                                            <div class="elemenst_right_bottom" style="    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+    margin-block: 0px;
+    font-size: 0.8125rem;
+    font-weight: 400;
+    font-family: CircularSp,CircularSp-Arab,CircularSp-Hebr,CircularSp-Cyrl,CircularSp-Grek,CircularSp-Deva,sans-serif;
+    color: #6a6a6a">
+                                                PlayList <span>•</span> ${shs[id].user}
+                                            </div>
+                                        </div>
+                                    </div>`;
+
+                    })
+
+
+                })
+        }
+
+    </script>
+{% endif %}
+{% block content %}
+
+{% endblock %}
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!Doctype html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="../../static/reg/style/style.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+</head>
+<body>
+<div class="section">
+    <div class="section_top">
+        Sign up Spotify
+    </div>
+    <div class="section_line">
+
+    </div>
+    <div class="section_center">
+        <form class="section_center_top" action="{{ url_for('reg') }}" method="post">
+            <div class="section_center_top">
+                <div class="section_center_top_h1">
+                    Your Full-name
+                </div>
+                <input class="section_center_top_input" name="name" placeholder="Enter Full-name">
+                <div class="section_center_top_h1">
+                    Email or username
+                </div>
+                <input class="section_center_top_input" name="gmail" placeholder="Email or username">
+                <div class="section_center_top_h1">Password</div>
+                <input class="section_center_top_input" name="password" placeholder="Password">
+                <div class="section_center_top_h1">Repeat Password</div>
+                <input class="section_center_top_input" placeholder="Repeat password">
+            </div>
+            <div style="margin-top: 10px;display: flex;justify-content: center;align-items: center;"><input name="checkbox" type="checkbox"> Are you Artist?</div>
+            <div class="section_center_bottom">
+                <button class="section_center_bottom_button">
+                    Sign up
+                </button>
+            </div>
+        </form>
+    </div>
+    <div class="section_line"></div>
+    <a style="text-decoration: none;" href="{{ url_for('login') }}">
+    <div class="section_bottom">
+        <div class="section_bottom_h1">You have account?</div>
+        <div class="section_bottom_h2">Login in Spofity</div>
+    </div></a>
+</div>
+</body>
+</html>

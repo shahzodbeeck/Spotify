@@ -1,0 +1,159 @@
+.scrool
+  overflow-y: scroll
+  max-height: 719.22px
+  width: 1155px
+
+.section
+  width: 1136.99px
+  background: #121212
+  border-radius: 6px
+
+  &_center
+    &_center
+      display: flex
+      justify-content: flex-start
+      width: 1136.99px
+      align-items: center
+      flex-wrap: wrap
+
+      &_element
+        width: 188.19px
+        height: 188.2px
+        border-radius: 8px
+        background: white
+        margin-left: 20px
+        margin-top: 10px
+        overflow: hidden
+
+        &_bottom
+          width: 100%
+          display: flex
+          align-items: flex-end
+          justify-content: flex-end
+          height: 140px
+
+        &_top
+          display: flex
+          align-items: center
+          justify-content: flex-start
+          margin-left: 20px
+          height: 50px
+          font-size: 20px
+          font-weight: 700
+          font-family: Arial
+          color: rgba(255, 255, 255, 1)
+
+
+    &_top
+      height: 45px
+      width: 1136.99px
+
+      &_h1
+        font-family: Arial
+        font-weight: 700
+        font-size: 20px
+        color: white
+        margin-left: 20px
+
+  &_top
+    background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5))
+    width: 1136.99px
+    position: sticky
+    top: 0
+    background-size: cover
+    height: 64px
+    display: flex
+    justify-content: space-around
+    align-items: center
+
+    &_search
+      width: 360px
+      height: 48px
+      background: rgba(36, 36, 36, 1)
+      box-shadow: 0 0 0 2px rgba(255, 255, 255, 1)
+      border-radius: 500px
+      display: flex
+      justify-content: flex-start
+      align-items: center
+
+      &_icon
+        margin-left: 10px
+
+      &_text
+        font-family: Arial
+        font-size: 14px
+        font-weight: 400
+        color: rgba(117, 117, 117, 1)
+        margin-left: 10px
+
+    &_center
+      width: 250px
+
+    &_img
+      background: url(../icons/button.png)
+      width: 72px
+      height: 32px
+      background-size: cover
+
+
+    &_right
+      width: 200px
+      display: flex
+      justify-content: space-around
+      align-items: center
+
+      &_log
+        width: 109.38px
+        height: 48px
+        border-radius: 500px
+        background: white
+        display: flex
+        justify-content: center
+        align-items: center
+        font-weight: 700
+        font-size: 15px
+        line-height: 17.25px
+
+      &_sign
+        width: 56px
+        height: 17px
+        color: #A7A7A7
+        font-size: 15px
+        font-weight: 700
+
+::-webkit-scrollbar
+  width: 18px
+
+::-webkit-scrollbar-track
+  background: transparent
+  height: 20px
+
+::-webkit-scrollbar-thumb
+  background: #727272
+  height: 20px
+  width: 18px
+
+::-webkit-scrollbar-thumb:hover
+  background: #a7a7a7
+
+.can
+  opacity: 0
+  display: none
+  color: red
+  font-size: 20px
+
+.pencil
+  display: none
+  opacity: 0
+  color: #1db954
+
+.section_center_center_element:hover .can,.section_center_center_element:hover .pencil
+  opacity: 1
+  display: flex
+.cointener
+  right: 0
+  width: 50px
+  height: 20px
+  display: flex
+  justify-content: space-around
+  align-items: flex-end
